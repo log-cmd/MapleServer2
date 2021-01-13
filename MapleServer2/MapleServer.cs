@@ -67,6 +67,7 @@ namespace MapleServer2 {
                         logger.Info($"Unknown command:{input[0]} args:{(input.Length > 1 ? input[1] : "N/A")}");
                         break;
                 }
+                System.Threading.Thread.Sleep(1);
             }
             #endregion
         }

@@ -34,7 +34,13 @@ namespace MapleServer2.PacketHandlers.Game {
                     .FirstOrDefault(portal => portal.Target == srcMapId);
                 if (dstPortal == default) {
                     logger.Warning($"Unable to find return portal to map:{srcMapId} in map:{srcPortal.Target}");
-                    return;
+                    //return;
+                    dstPortal = MapEntityStorage.GetPortals(srcPortal.Target).FirstOrDefault();
+
+                    if (dstPortal == default)
+                    {
+                        return;
+                    }
                 }
 
                 // TODO: There needs to be a more centralized way to set coordinates...

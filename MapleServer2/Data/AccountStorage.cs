@@ -19,9 +19,12 @@ namespace MapleServer2.Data {
 
         static AccountStorage () {
             // Add temp characters
-            accountCharacters.Add(DEFAULT_ACCOUNT, new List<long> { DEFAULT_CHAR1, DEFAULT_CHAR2 });
+            accountCharacters.Add(DEFAULT_ACCOUNT, new List<long> { DEFAULT_CHAR1, DEFAULT_CHAR1+1, DEFAULT_CHAR1+2, DEFAULT_CHAR1+3, DEFAULT_CHAR2 });
             characters.Add(DEFAULT_CHAR1, Player.Default(DEFAULT_ACCOUNT, DEFAULT_CHAR1));
-            characters.Add(DEFAULT_CHAR2, Player.MaleDefault(DEFAULT_ACCOUNT, DEFAULT_CHAR2));
+            characters.Add(DEFAULT_CHAR1+1, Player.Default(DEFAULT_ACCOUNT, DEFAULT_CHAR1+1));
+            characters.Add(DEFAULT_CHAR1+2, Player.Default(DEFAULT_ACCOUNT, DEFAULT_CHAR1+2));
+            characters.Add(DEFAULT_CHAR1+3, Player.Default(DEFAULT_ACCOUNT, DEFAULT_CHAR1+3));
+            characters.Add(DEFAULT_CHAR2, Player.Default2(DEFAULT_ACCOUNT, DEFAULT_CHAR2));
         }
 
         // Retrieves a list of character ids for an account

@@ -20,8 +20,26 @@ namespace MapleServer2.Servers.Game {
         public readonly FieldState State = new FieldState();
         private readonly HashSet<GameSession> sessions = new HashSet<GameSession>();
 
+        public class Dummy
+        {
+            public long acountId;
+            public long characterId;
+            public IFieldObject<Player> player;
+
+            public short ofsx;
+            public short ofsy;
+            public short ofsz;
+        }
+
+        public List<Dummy> DummyList = new List<Dummy>();
+
         public FieldManager(int mapId) {
             this.MapId = mapId;
+
+            if(MapEntityStorage.GetNpcs(mapId) == null || MapEntityStorage.GetPortals(mapId) == null)
+            {
+                return;
+            }
 
             // Load default npcs for map from config
             foreach (MapNpc npc in MapEntityStorage.GetNpcs(mapId)) {

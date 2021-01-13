@@ -98,30 +98,104 @@ namespace MapleServer2.Types {
             };
         }
 
+        static byte[] ToByteArray(params float[] p)
+        {
+            var ret = new byte[sizeof(float) * p.Length];
+
+            for(var i = 0; i < p.Length; i++)
+            {
+                Array.Copy(BitConverter.GetBytes(p[i]), 0, ret, sizeof(float) * i, sizeof(float));
+            }
+            return ret;
+        }
+
         public static Item Hair() {
-            return new Item(10200148) {
+            // y z x
+            var L = ToByteArray(50.0f, -22, -16, 0.0f, -90, 40);
+            var R = ToByteArray(50.0f, -22, 16, 180, -90, -40);
+
+
+            return new Item(10200011) {
                 Uid = 2867972925711604442,
                 CreationTime = 1565575851,
                 Color = EquipColor.Custom(
-                    Maple2Storage.Types.Color.Argb(0xFF, 0x7E, 0xCC, 0xF7),
-                    Maple2Storage.Types.Color.Argb(0xFF, 0x4C, 0x85, 0xDB),
-                    Maple2Storage.Types.Color.Argb(0xFF, 0x48, 0x5E, 0xA8),
-                    15
+                    Maple2Storage.Types.Color.Argb32(0xfff4bd58),
+                    Maple2Storage.Types.Color.Argb32(0xfff4bd58),
+                    Maple2Storage.Types.Color.Argb32(0xffd37fe4),
+                    23
                 ),
-                HairD = HairData.hairData(0.3f, 0.3f, new byte[24], new byte[24]),
+                HairD = HairData.hairData(1.0f, 1.0f, L, R),
+                AppearanceFlag = 2,
+                Stats = new ItemStats(),
+            };
+        }
+
+        public static Item HairCol(Color col)
+        {
+            // y z x
+            var L = ToByteArray(50.0f, -22, -16, 0.0f, -90, 40);
+            var R = ToByteArray(50.0f, -22, 16, 180, -90, -40);
+
+
+            return new Item(10200011)
+            {
+                Uid = 2867972925711604442,
+                CreationTime = 1565575851,
+                Color = EquipColor.Custom(
+                    col,
+                    col,
+                    col,
+                    23
+                ),
+                HairD = HairData.hairData(1.0f, 1.0f, L, R),
                 AppearanceFlag = 2,
                 Stats = new ItemStats(),
             };
         }
 
         public static Item Face() {
-            return new Item(10300004) {
+            return new Item(10300003) {
                 Uid = 2754959794416496483,
                 CreationTime = 1558494660,
                 Color = EquipColor.Custom(
-                    Maple2Storage.Types.Color.Argb(0xFF, 0xB5, 0x24, 0x29),
-                    Maple2Storage.Types.Color.Argb(0xFF, 0xF7, 0xE3, 0xE3),
-                    Maple2Storage.Types.Color.Argb(0xFF, 0x14, 0x07, 0x02),
+                    Maple2Storage.Types.Color.Argb32(0xff77d8f9),
+                    Maple2Storage.Types.Color.Argb32(0xff4c85db),
+                    Maple2Storage.Types.Color.Argb32(0xff0c2860),
+                    0
+                ),
+                AppearanceFlag = 3,
+                Stats = new ItemStats(),
+            };
+        }
+
+        public static Item Hair2()
+        {
+            return new Item(10200224)
+            {
+                Uid = 2867972925711610000,
+                CreationTime = 1565575851,
+                Color = EquipColor.Custom(
+                    Maple2Storage.Types.Color.Argb32(0xffF09058),
+                    Maple2Storage.Types.Color.Argb32(0xffF09058),
+                    Maple2Storage.Types.Color.Argb32(0xffF09058),
+                    23
+                ),
+                HairD = HairData.hairData(0.1f, 1.0f, new byte[24], new byte[24]),
+                AppearanceFlag = 2,
+                Stats = new ItemStats(),
+            };
+        }
+
+        public static Item Face2()
+        {
+            return new Item(10300131)
+            {
+                Uid = 2754959794416410001,
+                CreationTime = 1558494660,
+                Color = EquipColor.Custom(
+                    Maple2Storage.Types.Color.Argb32(0xff0463fc),
+                    Maple2Storage.Types.Color.Argb32(0xff0463fc),
+                    Maple2Storage.Types.Color.Argb32(0xff001131),
                     0
                 ),
                 AppearanceFlag = 3,

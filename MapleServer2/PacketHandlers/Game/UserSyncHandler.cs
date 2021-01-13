@@ -36,6 +36,24 @@ namespace MapleServer2.PacketHandlers.Game {
             session.FieldPlayer.Coord = syncStates[0].Coord.ToFloat();
             // not sure if this needs to be synced here
             session.Player.Animation = syncStates[0].Animation1;
+
+            var orgCoord = syncStates[0].Coord;
+
+            lock (session.FieldManager.DummyList)
+            {
+                foreach (var dummy in session.FieldManager.DummyList)
+                {
+                    for (int i = 0; i < segments; i++)
+                    {
+                        syncStates[i].Coord = Maple2Storage.Types.CoordS.From(
+                            (short)(orgCoord.X + dummy.ofsx),
+                            (short)(orgCoord.Y + dummy.ofsy),
+                            (short)(orgCoord.Z + dummy.ofsz));
+                    }
+                    var pkt = SyncStatePacket.UserSync(dummy.player, syncStates);
+                    session.Send(pkt);
+                }
+            }
         }
     }
 }

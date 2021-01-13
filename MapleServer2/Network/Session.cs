@@ -214,6 +214,7 @@ namespace MapleServer2.Network {
                         SendInternal(packet);
                     }
                 }
+                Thread.Sleep(1);
             }
         }
 

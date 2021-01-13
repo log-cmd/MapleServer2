@@ -2,7 +2,7 @@
 
 namespace MapleServer2.Types {
     public interface IFieldObject<out T> {
-        public int ObjectId { get; }
+        public int ObjectId { get; set; }
         public T Value { get; }
 
         public CoordF Coord { get; set; }

@@ -17,6 +17,17 @@ namespace Maple2Storage.Types {
             };
         }
 
+        public static Color Argb32(uint argb)
+        {
+            return new Color
+            {
+                Alpha = (byte)((argb >> 24) & 0xff),
+                Red = (byte)((argb >> 16) & 0xff),
+                Green = (byte)((argb >> 8) & 0xff),
+                Blue = (byte)((argb) & 0xff),
+            };
+        }
+
         public override string ToString() => $"ARGB({Alpha:X2}, {Red:X2}, {Green:X2}, {Blue:X2})";
     }
 
@@ -57,6 +68,17 @@ namespace Maple2Storage.Types {
                 Secondary = secondary,
                 Tertiary = tertiary,
                 Index = -1
+            };
+        }
+
+        public static EquipColor Mono(Color col, int index = -1)
+        {
+            return new EquipColor
+            {
+                Primary = col,
+                Secondary = col,
+                Tertiary = col,
+                Index = index
             };
         }
 

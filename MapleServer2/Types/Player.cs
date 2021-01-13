@@ -77,7 +77,59 @@ namespace MapleServer2.Types {
 
         public GameOptions GameOptions { get; private set; }
 
-        public static Player Default(long accountId, long characterId, string name = "SparkmodF") {
+        static int mapId = 02000111; // ビーチウェイ
+        //static int mapId = 61000004;
+
+        public static Player Default(long accountId, long characterId, string name = "都会へ行く") {
+            PlayerStats stats = PlayerStats.Default();
+            stats.Hp = new PlayerStat(1000, 0, 1000);
+            stats.CurrentHp = new PlayerStat(0, 1000, 0);
+            stats.Spirit = new PlayerStat(100, 100, 100);
+            stats.Stamina = new PlayerStat(120, 120, 120);
+            stats.AtkSpd = new PlayerStat(120, 100, 130);
+            stats.MoveSpd = new PlayerStat(110, 100, 150);
+            stats.JumpHeight = new PlayerStat(510, 100, 530);
+
+            return new Player
+            {
+                //MapId = 2000062,//2000496,// 2000062,
+                //MapId = 02000111, // ビーチウェイ111
+                MapId = mapId, // トライア
+                AccountId = accountId,
+                CharacterId = characterId,
+                Level = 59,
+                Name = name,
+                Gender = 1,
+                Motto = "Motto",
+                HomeName = "HomeName",
+                Coord = CoordF.From(-2300, 3100, 1400), //Little Harbor
+                //Coord = CoordF.From(-4050, -1200, 1350), // tria
+                //Coord = CoordF.From(570,-1846,1350), // beauty
+                JobGroupId = 60,//50
+                SkinColor = new SkinColor()
+                {
+                    Primary = Color.Argb(0xFF, 0xEA, 0xBF, 0xAE)
+                },
+                CreationTime = DateTimeOffset.Now.ToUnixTimeSeconds(),
+                Equips = new Dictionary<ItemSlot, Item> {
+                    { ItemSlot.ER, Item.Ear() },
+                    { ItemSlot.HR, Item.Hair() },
+                    { ItemSlot.FA, Item.Face() },
+                    { ItemSlot.FD, Item.FaceDecoration() },
+                    {ItemSlot.CP, new Item(11300139){Uid=11300139} },
+                    {ItemSlot.SH, new Item(11401168){Uid=11401168} },
+                    {ItemSlot.PA, new Item(11500033){Uid=11500033, Color=EquipColor.Mono(Color.Argb(0xff,101,237,51))} },
+                    {ItemSlot.RH, new Item(15300141){Uid=15300141} },
+                },
+                Stats = stats,
+                GameOptions = new GameOptions(),
+                Mesos = 999999999999999999,
+
+            };
+        }
+
+        public static Player Default2(long accountId, long characterId, string name = "Thief")
+        {
             PlayerStats stats = PlayerStats.Default();
             stats.Hp = new PlayerStat(1000, 0, 1000);
             stats.CurrentHp = new PlayerStat(0, 1000, 0);
@@ -89,7 +141,9 @@ namespace MapleServer2.Types {
 
             return new Player
             {
-                MapId = 2000062,
+                //MapId = 2000062,//2000496,// 2000062,
+                //MapId = 02000111, // ビーチウェイ111
+                MapId = mapId, // トライア
                 AccountId = accountId,
                 CharacterId = characterId,
                 Level = 60,
@@ -97,9 +151,10 @@ namespace MapleServer2.Types {
                 Gender = 1,
                 Motto = "Motto",
                 HomeName = "HomeName",
-                Coord = CoordF.From(2850, 2550, 1800), //Little Harbor
-                //Coord = CoordF.From(500, 500, 15000), // tria
-                JobGroupId = 50,
+                //Coord = CoordF.From(2850, 2550, 1800), //Little Harbor
+                Coord = CoordF.From(500, 500, 15000), // tria
+                //Coord = CoordF.From(570,-1846,1350), // beauty
+                JobGroupId = 70,//50
                 SkinColor = new SkinColor()
                 {
                     Primary = Color.Argb(0xFF, 0xEA, 0xBF, 0xAE)
@@ -107,9 +162,11 @@ namespace MapleServer2.Types {
                 CreationTime = DateTimeOffset.Now.ToUnixTimeSeconds(),
                 Equips = new Dictionary<ItemSlot, Item> {
                     { ItemSlot.ER, Item.Ear() },
-                    { ItemSlot.HR, Item.Hair() },
-                    { ItemSlot.FA, Item.Face() },
+                    { ItemSlot.HR, Item.Hair2() },
+                    { ItemSlot.FA, Item.Face2() },
                     { ItemSlot.FD, Item.FaceDecoration() },
+                    {ItemSlot.CL, new Item(12200420){Uid=12200420} },
+                    {ItemSlot.CP, new Item(11304830){ Uid=11304830 } },
                 },
                 Stats = stats,
                 GameOptions = new GameOptions(),
@@ -131,7 +188,7 @@ namespace MapleServer2.Types {
 
             return new Player
             {
-                MapId = 2000062,
+                MapId = 02000111,
                 AccountId = accountId,
                 CharacterId = characterId,
                 Level = 70,
